@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+option go_package = ".;chatserver";
+package chatserver;
+
+message FromClient {
+
+    google.protobuf.Timestamp ts = 1;
+    string name = 2;
+    string body = 3;
+}
+
+message FromServer {
+
+    google.protobuf.Timestamp ts = 1;
+    string name = 2;
+    string body = 3;
+
+}
+
+
+
+service Services {
+
+    rpc ChatService(stream FromClient) returns (stream FromServer){};
+}
